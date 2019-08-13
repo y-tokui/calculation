@@ -1,13 +1,13 @@
 <p>計算練習結果</p>
 
-  <?php
+<?php
   for ($i=0; $i<5; $i++) {
     echo $i+1 . "問目  ";
     $x = $_POST["x{$i}"];
     $y = $_POST["y{$i}"];
     $ans_plus = $x + $y;
     $ans_minus = $x - $y;
-		$ope = $_POST["ope{$i}"];
+    $ope = $_POST["ope{$i}"];
     $ans = $_POST["ans{$i}"];
     
     // var_dump($ans);
@@ -32,3 +32,4 @@
       break;
     }
   }
+?>
