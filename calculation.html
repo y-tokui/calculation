@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="setting">
+    <p>どの範囲まで出題しますか？</p>
+    <form action="questions.php" method="post">
+      <p>
+        問題桁数<br/>
+        <input name="digit" type="checkbox" class="initialset" value="1">0~9まで<br/>
+        <input name="digit" type="checkbox" class="initialset" value="2">0~99まで
+      </p>
+      <p>
+        演算指定（指定がないときは足し算のみ行われます）<br/>
+        <input name="plus" type="checkbox" value="plus">足し算<br/>
+        <input name="minus" type="checkbox" value="minus">引き算
+      </p>
+      <p>
+        <input type="submit" value="送信">
+        <input id="reset" type="button" value="リセット">
+      </p>
+    </form>
+  </div>
+
+  <script>
+    $(".initialset").on('click', function(){
+      $('.initialset').prop('checked', false);
+      $(this).prop('checked', true);
+    });
+    $("#reset").on('click', function(){
+      $(this.form).find(":checked").prop('checked', false);
+    });
+  </script>
+</body>
+</html>
