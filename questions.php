@@ -8,32 +8,37 @@
     $questions = 5;
 
     if ($_POST['plus'] === "+" && $_POST['minus'] === "-"){
-        $operand = ["+", "-"];
+        $operand_array = ["+", "-"];
     }elseif ($_POST['plus'] === "+"){
-        $operand = ["+"];
+        $operand_array = ["+"];
     }elseif ($_POST['minus'] === "-"){
-        $operand = ["-"];
+        $operand_array = ["-"];
     }else{
-        $operand = ["+"];
+        $operand_array = ["+"]; 
     }
-    
+
     $rand = range(0, $rand_max);
     $x = array_rand($rand, $questions);
     $y = array_rand($rand, $questions);
-    
+    $operand = array_rand($operand_array);
+    $i = 1;
+    foreach($operand as $key){
+        if($i < $questions)
+    }
 ?>
 
 <p>計算練習</p>
 <p>
     選択したのは0～<?php echo $rand_max; ?>までの問題です。<br/>
     全部で<?php echo $questions; ?>問出題します。
+    <?php var_dump($operand); ?>
 </p>
 <form action="answers.php" method="post">
     <?php foreach ($x as $key => $value): ?>
         <p>   
             <?php 
                 echo ($key + 1). "問目  ";
-                echo $value . $operand[array_rand($operand)] . $y[$key] . "=";    
+                echo $value . $operand[$key] . $y[$key] . "=";    
             ?>
             <input type='text' name='answer[]'><br>  
             <input type="hidden" name="x[]" value="<?php echo $value ?>">
