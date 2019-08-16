@@ -1,35 +1,46 @@
+<?php
+
+    // エスケープ処理
+    function h($s){
+        if (is_array($s)) {
+          return array_map("h", $s);
+        } else {
+          return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+        }
+    }
+
+    $x = h($_POST["x"]);
+    $y = h($_POST["y"]);
+    $operand = h($_POST["operand"]);
+    $answer = h($_POST["answer"]);
+
+    // 正誤判定
+    function isCorrect($x, $y, $answer){
+        if ($x + $y == $answer || $x - $y == $answer){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    // 答えを表示
+    function correctAnswer($x, $y, $operand){
+        if ($operand === "+"){
+            echo $x + $y ;
+        }else{
+            echo $x - $y ; 
+        }
+    }   
+?>
+
 <p>計算練習結果</p>
 
-<?php
-  for ($i=0; $i<5; $i++) {
-    echo $i+1 . "問目  ";
-    $x = $_POST["x{$i}"];
-    $y = $_POST["y{$i}"];
-    $ans_plus = $x + $y;
-    $ans_minus = $x - $y;
-    $ope = $_POST["ope{$i}"];
-    $ans = $_POST["ans{$i}"];
-    
-    // var_dump($ans);
-    // 足し算処理
-    switch ($ope){
-      case "+":
-        echo "   {$x} + {$y} = {$ans}" ;
-      if ($x+$y == $ans){
-        echo "....正解 <br/>";
-      }else{
-        echo "....不正解。正解は{$ans_plus} <br/>";
-      }
-      break;
-      // 引き算処理
-      case "-":
-        echo "   {$x} - {$y} = {$ans}" ;
-      if ($x-$y == $ans){
-        echo "....正解 <br/>";
-      }else{
-        echo "....不正解。正解は{$ans_minus} <br/>";
-      }
-      break;
-    }
-  }
-?>
+<?php foreach ($x as $key => $value): ?>
+    <p>
+        <?php 
+            echo ($key + 1). "問目   ";
+            echo $value . $operand[$key] . $y[$key] . "=" . $answer[$key];   
+            echo isCorrect($value, $y[$key], $answer[$key]) ? "...正解" : "...不正解。答えは",correctAnswer($value, $y[$key], $operand[$key]),"<br>"
+        ?>
+    </p>
+<?php endforeach; ?>
