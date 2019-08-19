@@ -1,5 +1,5 @@
 <?php
-    if ($_POST['digit'] == 1){
+    if ($_POST['digit'] == 1) {
         $rand_max = 9;
     } else {
         $rand_max = 99;
@@ -7,20 +7,20 @@
 
     $questions = 5;
 
-    if ($_POST['plus'] === "+" && $_POST['minus'] === "-"){
+    if ($_POST['plus'] === "+" && $_POST['minus'] === "-") {
         $operand_array = ["+", "-"];
-    }elseif ($_POST['plus'] === "+"){
+    } elseif ($_POST['plus'] === "+") {
         $operand_array = ["+"];
-    }elseif ($_POST['minus'] === "-"){
+    } elseif ($_POST['minus'] === "-") {
         $operand_array = ["-"];
-    }else{
+    } else {
         $operand_array = ["+"]; 
     }
 
     $rand = range(0, $rand_max);
     $x = array_rand($rand, $questions);
     $y = array_rand($rand, $questions);
-    for ($i = 1; $i <= $questions; $i ++){
+    for ($i = 1; $i <= $questions; $i ++) {
       $operand[] = $operand_array[array_rand($operand_array)];
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-    function h($s){
+    function h($s) {
         if (is_array($s)) {
           return array_map("h", $s);
         } else {

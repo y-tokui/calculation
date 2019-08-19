@@ -9,18 +9,18 @@
 
     // 正誤判定
     function isCorrect($x, $y, $answer){
-        if ($x + $y == $answer || $x - $y == $answer){
+        if ($x + $y == $answer || $x - $y == $answer) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
     // 答えを表示
     function correctAnswer($x, $y, $operand){
-        if ($operand === "+"){
+        if ($operand === "+") {
             echo $x + $y ;
-        }else{
+        } else {
             echo $x - $y ; 
         }
     }   
