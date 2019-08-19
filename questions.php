@@ -20,10 +20,8 @@
     $rand = range(0, $rand_max);
     $x = array_rand($rand, $questions);
     $y = array_rand($rand, $questions);
-    $operand = array_rand($operand_array);
-    $i = 1;
-    foreach($operand as $key){
-        if($i < $questions)
+    for ($i = 1; $i <= $questions; $i ++){
+      $operand[] = $operand_array[array_rand($operand_array)];
     }
 ?>
 
@@ -31,7 +29,6 @@
 <p>
     選択したのは0～<?php echo $rand_max; ?>までの問題です。<br/>
     全部で<?php echo $questions; ?>問出題します。
-    <?php var_dump($operand); ?>
 </p>
 <form action="answers.php" method="post">
     <?php foreach ($x as $key => $value): ?>
@@ -43,12 +40,9 @@
             <input type='text' name='answer[]'><br>  
             <input type="hidden" name="x[]" value="<?php echo $value ?>">
             <input type="hidden" name="y[]" value="<?php echo $y[$key] ?>">
-            <input type='hidden' name='operand[]' value='<?php echo $operand[array_rand($operand)]; ?>'>
+            <input type='hidden' name='operand[]' value='<?php echo $operand[$key]; ?>'>
         </p>
     <?php endforeach; ?>
     <input type="submit">
     <input type="reset"> 
 </form>
-
-
-
