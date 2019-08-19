@@ -1,5 +1,5 @@
 <?php
-    if ($_POST['digit'] == 1) {
+    if ($_POST['digit'] === 1) {
         $rand_max = 9;
     } else {
         $rand_max = 99;
