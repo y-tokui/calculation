@@ -11,11 +11,9 @@
         $operand_array = ["+", "-"];
     } elseif ($_POST['plus'] === "+") {
         $operand_array = ["+"];
-    } elseif ($_POST['minus'] === "-") {
-        $operand_array = ["-"];
     } else {
-        $operand_array = ["+"]; 
-    }
+        $operand_array = ["-"];
+    } 
 
     $rand = range(0, $rand_max);
     $x = array_rand($rand, QUESTIONS_NUM);
