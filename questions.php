@@ -1,43 +1,46 @@
+<?php
+    if ($_POST['digit'] === 1) {
+        $rand_max = 9;
+    } else {
+        $rand_max = 99;
+    }
+
+    const QUESTIONS_NUM = 5;
+
+    if ($_POST['plus'] === "+" && $_POST['minus'] === "-") {
+        $operand_array = ["+", "-"];
+    } elseif ($_POST['plus'] === "+") {
+        $operand_array = ["+"];
+    } else {
+        $operand_array = ["-"];
+    } 
+
+    $rand = range(0, $rand_max);
+    $x = array_rand($rand, QUESTIONS_NUM);
+    $y = array_rand($rand, QUESTIONS_NUM);
+    for ($i = 1; $i <= QUESTIONS_NUM; $i ++) {
+      $operand[] = $operand_array[array_rand($operand_array)];
+    }
+?>
+
 <p>計算練習</p>
 <p>
-  <?php
-    if ($_POST['digit'] == 1){
-      $rand_max = 9;
-    } else {
-      $rand_max = 99;
-    }
-    echo "選択したのは0～{$rand_max}までの問題です。<br/>
-          全部で5問出題します。";
-
-    if ($_POST['plus'] === "plus" && $_POST['minus'] === "minus"){
-      $ope = ["+", "-"];
-    }elseif ($_POST['plus'] === "plus"){
-      $ope = "+";
-    }
-    elseif ($_POST['minus'] === "minus"){
-      $ope = "-";
-    }else{
-      $ope = "+";
-    }
-    // var_dump($ope);
-  ?>
-</P>
-
+    選択したのは0～<?php echo $rand_max; ?>までの問題です。<br/>
+    全部で<?php echo QUESTIONS_NUM; ?>問出題します。
+</p>
 <form action="answers.php" method="post">
-  <?php
-  for($i=0; $i<5; $i++){
-    $x = rand(0, $rand_max);
-    $y = rand(0, $rand_max);
-    $ope_rand = $ope[array_rand($ope)];
-    echo $i+1 . "問目  ";
-    echo "{$x} {$ope_rand} {$y} = " ;
-    print("<input type='text' name='ans{$i}'><br>");
-    print("<input type='hidden' name='x{$i}' value='{$x}'>");
-    print("<input type='hidden' name='y{$i}' value='{$y}'>");
-    print("<input type='hidden' name='ope{$i}' value='{$ope_rand}'>");
-  }
-  ?>
-  <br>
-  <input type="submit">
-  <input type="reset"> 
+    <?php foreach ($x as $key => $value): ?>
+        <p>   
+            <?php 
+                echo ($key + 1). "問目  ";
+                echo $value . $operand[$key] . $y[$key] . "=";    
+            ?>
+            <input type='text' name='answer[]'><br>  
+            <input type="hidden" name="x[]" value="<?php echo $value ?>">
+            <input type="hidden" name="y[]" value="<?php echo $y[$key] ?>">
+            <input type='hidden' name='operand[]' value='<?php echo $operand[$key]; ?>'>
+        </p>
+    <?php endforeach; ?>
+    <input type="submit">
+    <input type="reset"> 
 </form>
